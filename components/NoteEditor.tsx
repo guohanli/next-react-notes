@@ -7,6 +7,8 @@ import { deleteNote, saveNote } from "@/actions";
 import DeleteButton from "./DeleteButton";
 import SaveButton from "./SaveButton";
 import type { State } from "@/actions";
+import { useTranslation } from "@/app/i18n/client";
+import { useParams } from "next/navigation";
 
 interface Props {
   noteId: string | null;
@@ -30,6 +32,9 @@ export default function NoteEditor({
   const [body, setBody] = useState(initialBody);
   const isDraft = !noteId;
 
+  const { lng } = useParams<{ lng: string }>();
+  const { t } = useTranslation(lng, "note");
+
   useEffect(() => {
     if (saveState.errors) {
       // 处理错误
@@ -42,6 +47,7 @@ export default function NoteEditor({
       <form className="note-editor-form" autoComplete="off">
         <div className="note-editor-menu" role="menubar">
           <input type="hidden" name="noteId" value={noteId as string} />
+          <input type="hidden" name="lng" value={lng as string} />
           <SaveButton formAction={saveFormAction} />
           <DeleteButton isDraft={isDraft} formAction={delFormAction} />
         </div>
@@ -51,7 +57,7 @@ export default function NoteEditor({
           {saveState.errors && saveState.errors[0].message}
         </div>
         <label className="offscreen" htmlFor="note-title-input">
-          Enter a title for your note
+          {t("enterTitle")}
         </label>
         <input
           id="note-title-input"
@@ -63,7 +69,7 @@ export default function NoteEditor({
           }}
         />
         <label className="offscreen" htmlFor="note-body-input">
-          Enter the body for your note
+          {t("enterContent")}
         </label>
         <textarea
           value={body}
@@ -74,7 +80,7 @@ export default function NoteEditor({
       </form>
       <div className="note-editor-preview">
         <div className="label label--preview" role="status">
-          Preview
+          {t("preview")}
         </div>
         <h1 className="note-title">{title}</h1>
         <NotePreview>{body}</NotePreview>

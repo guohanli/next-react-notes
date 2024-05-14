@@ -41,7 +41,9 @@ export async function saveNote(
     const res = await addNote(JSON.stringify(data));
     revalidatePath("/", "layout");
   }
-  return { message: "Note saved" };
+
+  const lng = formData.get("lng") as string;
+  return { message: lng === "zh" ? "笔记已保存" : "Note saved" };
 }
 
 export async function deleteNote(

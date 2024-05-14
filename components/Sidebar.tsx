@@ -5,13 +5,14 @@ import SidebarNoteList from "@/components/SidebarNoteList";
 import EditButton from "@/components/EditButton";
 import NoteListSkeleton from "@/components/NoteListSkeleton";
 import { useTranslation } from "@/app/i18n";
+import FooterBase from "./Footer/FooterBase";
 
 export default async function Sidebar({ lng }: { lng: string }) {
   const { t } = await useTranslation(lng);
   return (
     <>
       <section className="col sidebar">
-        <Link href={"/"} className="link--unstyled">
+        <Link href={`/${lng}`} className="link--unstyled">
           <section className="sidebar-header">
             <img
               className="logo"
@@ -25,14 +26,17 @@ export default async function Sidebar({ lng }: { lng: string }) {
           </section>
         </Link>
         <section className="sidebar-menu" role="menubar">
-          <SidebarSearchField />
-          <EditButton noteId={null}>{t("new")}</EditButton>
+          <SidebarSearchField lng={lng} />
+          <EditButton lng={lng} noteId={null}>
+            {t("new")}
+          </EditButton>
         </section>
         <nav>
           <Suspense fallback={<NoteListSkeleton />}>
             <SidebarNoteList />
           </Suspense>
         </nav>
+        <FooterBase />
       </section>
     </>
   );

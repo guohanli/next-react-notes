@@ -1,8 +1,7 @@
 // app/[lng]/layout.js
-import { locales } from "@/config";
+import { languages } from "@/app/i18n/settings";
 import "./style.css";
 import Sidebar from "@/components/Sidebar";
-import { Footer } from "@/components/Footer";
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +9,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return locales.map((lng) => ({ lng }));
+  return languages.map((lng) => ({ lng }));
 }
 
 export default async function RootLayout({ children, params: { lng } }: Props) {
@@ -22,7 +21,6 @@ export default async function RootLayout({ children, params: { lng } }: Props) {
             <Sidebar lng={lng} />
             <section className="col note-viewer">{children}</section>
           </div>
-          <Footer lng={lng} />
         </div>
       </body>
     </html>

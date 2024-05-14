@@ -1,48 +1,57 @@
-import { match } from "@formatjs/intl-localematcher";
-import Negotiator from "negotiator";
-import { NextRequest, NextResponse } from "next/server";
-import { locales, defaultLocale } from "@/config";
+import { NextResponse, NextRequest } from "next/server";
+import acceptLanguage from "accept-language";
+import { fallbackLng, languages } from "@/app/i18n/settings";
 
-const publicFile = /\.(.*)$/;
-const excludeFile = ["logo.svg"];
-
-function getLocale(request: NextRequest) {
-  const headers = {
-    "accept-language": request.headers.get("accept-language") || "",
-  };
-  // 这里不能直接传入 request，有更简单的写法欢迎评论留言
-  const languages = new Negotiator({ headers }).languages();
-
-  return match(languages, locales, defaultLocale);
-}
-
-export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  // 判断请求路径中是否已存在语言，已存在语言则跳过
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  if (pathnameHasLocale) return;
-
-  // 如果是 public 文件，不重定向
-  if (
-    publicFile.test(pathname) &&
-    excludeFile.indexOf(pathname.substring(1)) == -1
-  )
-    return;
-
-  // 获取匹配的 locale
-  const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  // 默认语言不重定向
-  if (locale == defaultLocale) {
-    return NextResponse.rewrite(request.nextUrl);
-  }
-  // 重定向，如 /products 重定向到 /en-US/products
-  return Response.redirect(request.nextUrl);
-}
+acceptLanguage.languages(languages);
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|site.webmanifest).*)",
+  ],
 };
+
+// 静态资源文件
+const publicFile = /\.(.*)$/;
+// 多语言有区别的静态资源文件
+const excludeFile = ["logo.svg"];
+
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const browserLanguage = acceptLanguage.get(
+    req.headers.get("Accept-Language")
+  );
+
+  const pathnameHasLocale = languages.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+  // 如果请求路径中已存在语言
+  if (pathnameHasLocale) {
+    // 如果语言等于浏览器默认语言，去掉语言前缀
+    if (
+      browserLanguage &&
+      pathname.startsWith(`/${browserLanguage}`) &&
+      !excludeFile.some((file) => pathname.endsWith(file))
+    ) {
+      req.nextUrl.pathname = pathname.replace(`/${browserLanguage}`, "");
+      return NextResponse.redirect(req.nextUrl);
+    } else {
+      // 如果语言不等于浏览器默认语言，不做处理, 直接返回
+      return;
+    }
+  }
+
+  // 如果是 public 文件，不重定向
+  if (publicFile.test(pathname)) return;
+
+  // 协商语言
+  let lng = browserLanguage || fallbackLng;
+
+  req.nextUrl.pathname = `/${lng}${pathname}`;
+  // 浏览器默认语言不重定向
+  if (lng === browserLanguage) {
+    return NextResponse.rewrite(req.nextUrl);
+  } else {
+    // 其他语言重定向，如 /products 重定向到 /en/products
+    return NextResponse.redirect(req.nextUrl);
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useTransition } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useParams } from "next/navigation";
 
 interface Props {
   id: string;
@@ -18,6 +18,7 @@ export default function SidebarNoteItemContent({
 }: Props) {
   const router = useRouter();
   const pathname = usePathname();
+  const { lng } = useParams<{ lng: string }>();
   const selectedId = pathname?.split("/")[1] || null;
 
   const [isPending] = useTransition();
@@ -60,7 +61,7 @@ export default function SidebarNoteItemContent({
             : "1px solid transparent",
         }}
         onClick={() => {
-          router.push(`/note/${id}`);
+          router.push(`/${lng}/note/${id}`);
         }}
       >
         Open note for preview

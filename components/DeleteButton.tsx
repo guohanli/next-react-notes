@@ -1,3 +1,5 @@
+import { useTranslation } from "@/app/i18n/client";
+import { useParams } from "next/navigation";
 import { useFormStatus } from "react-dom";
 
 interface Props {
@@ -7,6 +9,9 @@ interface Props {
 
 export default function DeleteButton({ isDraft, formAction }: Props) {
   const { pending } = useFormStatus();
+  const { lng } = useParams<{ lng: string }>();
+  const { t } = useTranslation(lng, "note");
+
   return (
     !isDraft && (
       <button
@@ -22,7 +27,7 @@ export default function DeleteButton({ isDraft, formAction }: Props) {
           alt=""
           role="presentation"
         />
-        Delete
+        {t("delete")}
       </button>
     )
   );

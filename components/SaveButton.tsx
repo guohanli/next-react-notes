@@ -1,3 +1,5 @@
+import { useTranslation } from "@/app/i18n/client";
+import { useParams } from "next/navigation";
 import { useFormStatus } from "react-dom";
 
 interface Props {
@@ -5,6 +7,9 @@ interface Props {
 }
 export default function EditButton({ formAction }: Props) {
   const { pending } = useFormStatus();
+  const { lng } = useParams<{ lng: string }>();
+  const { t } = useTranslation(lng, "note");
+
   return (
     <button
       className="note-editor-done"
@@ -20,7 +25,7 @@ export default function EditButton({ formAction }: Props) {
         alt=""
         role="presentation"
       />
-      {pending ? "Saving" : "Done"}
+      {pending ? t("saving") : t("done")}
     </button>
   );
 }
