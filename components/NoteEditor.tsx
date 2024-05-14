@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import NotePreview from "@/components/NotePreview";
 import { useFormState, useFormStatus } from "react-dom";
-import { deleteNote, saveNote } from "../app/actions";
+import { deleteNote, saveNote } from "@/actions";
 import DeleteButton from "./DeleteButton";
 import SaveButton from "./SaveButton";
-import type { State } from "../app/actions";
+import type { State } from "@/actions";
 
 interface Props {
   noteId: string | null;

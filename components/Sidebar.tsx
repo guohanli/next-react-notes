@@ -4,8 +4,10 @@ import SidebarSearchField from "@/components/SidebarSearchField";
 import SidebarNoteList from "@/components/SidebarNoteList";
 import EditButton from "@/components/EditButton";
 import NoteListSkeleton from "@/components/NoteListSkeleton";
+import { useTranslation } from "@/app/i18n";
 
-export default async function Sidebar() {
+export default async function Sidebar({ lng }: { lng: string }) {
+  const { t } = await useTranslation(lng);
   return (
     <>
       <section className="col sidebar">
@@ -13,7 +15,7 @@ export default async function Sidebar() {
           <section className="sidebar-header">
             <img
               className="logo"
-              src="/logo.svg"
+              src={`/${lng}/logo.svg`}
               width="22px"
               height="20px"
               alt=""
@@ -24,7 +26,7 @@ export default async function Sidebar() {
         </Link>
         <section className="sidebar-menu" role="menubar">
           <SidebarSearchField />
-          <EditButton noteId={null}>New</EditButton>
+          <EditButton noteId={null}>{t("new")}</EditButton>
         </section>
         <nav>
           <Suspense fallback={<NoteListSkeleton />}>
