@@ -5,7 +5,8 @@ import SidebarNoteList from "@/components/SidebarNoteList";
 import EditButton from "@/components/EditButton";
 import NoteListSkeleton from "@/components/NoteListSkeleton";
 import { useTranslation } from "@/app/i18n";
-import FooterBase from "./Footer/FooterBase";
+import Footer from "@/components/Footer";
+import SidebarImport from "@/components/SidebarImport";
 
 export default async function Sidebar({ lng }: { lng: string }) {
   const { t } = await useTranslation(lng);
@@ -36,7 +37,8 @@ export default async function Sidebar({ lng }: { lng: string }) {
             <SidebarNoteList />
           </Suspense>
         </nav>
-        <FooterBase />
+        <Footer lng={lng} />
+        <SidebarImport />
       </section>
     </>
   );

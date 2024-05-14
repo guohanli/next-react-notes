@@ -2,14 +2,13 @@
 import Link from "next/link";
 import { Trans } from "react-i18next/TransWithoutContext";
 import { languages } from "@/app/i18n/settings";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useTranslation } from "@/app/i18n/client";
 
-export default function FooterBase() {
-  const { lng } = useParams<{ lng: string }>();
-  const { i18n } = useTranslation(lng, "footer");
-  const { t } = i18n;
+export default function Footer({ lng }: { lng: string }) {
   let path = usePathname();
+  const { i18n } = useTranslation(lng, "footer");
+  const t = i18n.getFixedT(lng, "footer");
 
   return (
     <footer style={{ margin: "0 auto", width: "fit-content" }}>
