@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import NotePreview from "@/components/NotePreview";
 import { useFormState, useFormStatus } from "react-dom";
-import { deleteNote, saveNote } from "@/actions";
+import { deleteNote, saveNote } from "@/actions/note-actions";
 import DeleteButton from "./DeleteButton";
 import SaveButton from "./SaveButton";
-import type { State } from "@/actions";
+import type { State } from "@/actions/note-actions";
 import { useTranslation } from "@/app/i18n/client";
 import { useParams } from "next/navigation";
 

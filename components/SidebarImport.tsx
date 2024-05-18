@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
-import { importNote } from "@/actions";
+import { importNote } from "@/actions/note-actions";
 
 export default function SidebarImport() {
   const router = useRouter();
@@ -28,7 +28,6 @@ export default function SidebarImport() {
     }
 
     // 重置 file input
-    e.target.type = "text";
     e.target.type = "file";
   };
 

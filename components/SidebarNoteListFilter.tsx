@@ -2,12 +2,12 @@
 
 import { useSearchParams } from "next/navigation";
 import SidebarNoteItemContent from "@/components/SidebarNoteItemContent";
+import { Note } from "@prisma/client";
 
 export default function SidebarNoteList({
   notes,
 }: {
   notes: {
-    noteId: string;
     note: Note;
     header: React.ReactNode;
   }[];
@@ -17,21 +17,21 @@ export default function SidebarNoteList({
   return (
     <ul className="notes-list">
       {notes.map((noteItem) => {
-        const { noteId, note, header } = noteItem;
+        const { note, header } = noteItem;
         if (
           !searchText ||
           (searchText &&
             note.title.toLowerCase().includes(searchText.toLowerCase()))
         ) {
           return (
-            <li key={noteId}>
+            <li key={note.id}>
               <SidebarNoteItemContent
-                key={noteId}
-                id={noteId}
+                key={note.id}
+                id={note.id}
                 title={note.title}
                 expandedChildren={
                   <p className="sidebar-note-excerpt">
-                    {note.content.substring(0, 20) || <i>(No content)</i>}
+                    {note.content?.substring(0, 20) || <i>(No content)</i>}
                   </p>
                 }
               >

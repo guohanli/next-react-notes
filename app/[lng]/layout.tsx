@@ -17,10 +17,7 @@ export default async function RootLayout({ children, params: { lng } }: Props) {
     <html lang={lng}>
       <body>
         <div className="container">
-          <div className="main">
-            <Sidebar lng={lng} />
-            <section className="col note-viewer">{children}</section>
-          </div>
+          <div className="main">{children}</div>
         </div>
       </body>
     </html>

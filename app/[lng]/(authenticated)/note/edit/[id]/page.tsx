@@ -1,7 +1,6 @@
 import { useTranslation } from "@/app/i18n";
 import NoteEditor from "@/components/NoteEditor";
-import { getNote } from "@/lib/redis";
-import { sleep } from "@/lib/utils";
+import { getNote } from "@/lib/note";
 
 interface Props {
   params: {
@@ -13,9 +12,6 @@ interface Props {
 export default async function EditPage({ params: { id: noteId, lng } }: Props) {
   const note = await getNote(noteId);
   const { t } = await useTranslation(lng, "basic");
-
-  // 让效果更明显;
-  // await sleep(1000);
 
   if (note === null) {
     return (
@@ -29,7 +25,7 @@ export default async function EditPage({ params: { id: noteId, lng } }: Props) {
     <NoteEditor
       noteId={noteId}
       initialTitle={note.title}
-      initialBody={note.content}
+      initialBody={note.content!}
     />
   );
 }
