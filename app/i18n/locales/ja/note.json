@@ -1,10 +1,11 @@
 {
-  "delete" : "削除",
-  "done" : "完了",
-  "edit" : "編集",
-  "enterContent" : "あなたのノートのための内容を入力してください",
-  "enterTitle" : "あなたのノートタのイトルを入力してください",
-  "lastUpdatedOn" : "最終更新日：",
-  "preview" : "プレビュー",
-  "saving" : "節約"
+  "delete": "削除",
+  "done": "完了",
+  "edit": "編集",
+  "enterContent": "あなたのノートのための内容を入力してください",
+  "enterTitle": "あなたのノートタのイトルを入力してください",
+  "lastUpdatedOn": "最終更新日：",
+  "preview": "プレビュー",
+  "saving": "節約",
+  "noNotes": "まだノートが作成されていません！"
 }

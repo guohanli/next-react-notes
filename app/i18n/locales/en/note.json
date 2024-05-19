@@ -1,10 +1,11 @@
 {
-  "delete" : "delete",
-  "done" : "done",
-  "edit" : "edit",
-  "enterContent" : "Enter the content for your note",
-  "enterTitle" : "Enter the title for your note",
-  "lastUpdatedOn" : "Last updated on",
-  "preview" : "preview",
-  "saving" : "saving"
+  "delete": "delete",
+  "done": "done",
+  "edit": "edit",
+  "enterContent": "Enter the content for your note",
+  "enterTitle": "Enter the title for your note",
+  "lastUpdatedOn": "Last updated on",
+  "preview": "preview",
+  "saving": "saving",
+  "noNotes": "No notes created yet!"
 }

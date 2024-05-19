@@ -1,10 +1,11 @@
 {
-  "delete" : "删除",
-  "done" : "完成",
-  "edit" : "编辑",
-  "enterContent" : "在这里输入你的笔记内容",
-  "enterTitle" : "为你的笔记添加一个标题吧",
-  "lastUpdatedOn" : "最后更新于",
-  "preview" : "预览",
-  "saving" : "保存中"
+  "delete": "删除",
+  "done": "完成",
+  "edit": "编辑",
+  "enterContent": "在这里输入你的笔记内容",
+  "enterTitle": "为你的笔记添加一个标题吧",
+  "lastUpdatedOn": "最后更新于",
+  "preview": "预览",
+  "saving": "保存中",
+  "noNotes": "还没有笔记哦!"
 }

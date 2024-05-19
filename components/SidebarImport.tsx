@@ -25,7 +25,7 @@ export default function SidebarImport() {
 
     try {
       const data = await importNote(formData);
-      router.push(`/note/${data.uid}`);
+      router.push(`/${lng}/note/${data.uid}`);
     } catch (error) {
       console.error("something went wrong");
     }

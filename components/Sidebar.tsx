@@ -34,7 +34,7 @@ export default async function Sidebar({ lng }: { lng: string }) {
         </section>
         <nav>
           <Suspense fallback={<NoteListSkeleton />}>
-            <SidebarNoteList />
+            <SidebarNoteList lng={lng}/>
           </Suspense>
         </nav>
         <Footer lng={lng} />
