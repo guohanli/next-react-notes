@@ -2,12 +2,15 @@
 import { auth } from "@/actions/auth-actions";
 import { EMPTY_FORM_STATE } from "@/utils/to-form-state";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import { FieldError } from "./FieldError";
+import { useTranslation } from "@/app/i18n/client";
 
 export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
+  const { lng } = useParams<{ lng: string }>();
+  const { t } = useTranslation(lng, "auth");
   const [formState, formAction] = useFormState(
     auth.bind(null, mode),
     EMPTY_FORM_STATE
@@ -21,7 +24,7 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
 
   return (
     <>
-      <h2>Login Page</h2>
+      <h2> {mode === "login" ? t("loginPage") : t("signupPage")}</h2>
       <form
         action={formAction}
         style={{
@@ -48,14 +51,16 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
 
         {formState.message && <p>{formState.message}</p>}
         <button type="submit">
-          {mode === "login" ? "Sign In" : "Sign Up"}
+          {mode === "login" ? t("signin") : t("signup")}
         </button>
       </form>
       {mode === "login" && (
-        <Link href="/auth?mode=signup">Create an account</Link>
+        <Link href={`/${lng}/auth?mode=signup`}>{t("createAnAccount")}</Link>
       )}
       {mode === "signup" && (
-        <Link href="/auth?mode=login">Already have an account?</Link>
+        <Link href={`/${lng}/auth?mode=login`}>
+          {t("alreadyHaveAnAccount")}
+        </Link>
       )}
     </>
   );

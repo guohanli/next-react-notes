@@ -43,7 +43,14 @@ export async function saveNote(
   }
 
   const lng = formData.get("lng") as string;
-  return { message: lng === "zh" ? "笔记已保存" : "Note saved" };
+  return {
+    message:
+      lng === "zh"
+        ? "笔记已保存"
+        : lng === "en"
+        ? "Note saved"
+        : "メモが保存されました",
+  };
 }
 
 export async function deleteNote(

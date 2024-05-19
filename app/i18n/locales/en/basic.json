@@ -1,5 +1,8 @@
 {
+  "logout": "logout",
+  "initText": "Click the note on the left to view the content 🥺",
   "new": "new",
-  "initText": "Click a note on the left to view something! 🥺",
-  "search": "search"
+  "search": "search",
+  "welcome": "Welcome, ",
+  "importMd": "Import .md File"
 }
