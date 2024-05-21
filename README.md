@@ -9,6 +9,16 @@ This project is a Next.js implementation of a React Notes application. It adds m
 - **Note management:** Create, edit, and delete notes with a user-friendly interface.
 - **Markdown support:** Import note in Markdown format.
 
+## Technologies Used
+
+- **Next.js 14 (App Router):** Leveraging the latest features of Next.js, including the new App Router.
+- **Prisma:** An ORM for Node.js and TypeScript.
+- **MySQL:** A popular open-source relational database.
+- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+- **Lucia Auth:** A lightweight authentication library for managing user sessions.
+- **Next.js 14 Server Actions:** Utilizing the latest server actions feature in Next.js 14.
+- **Docker:** Containerized deployment using Docker, with easy setup via `docker compose up`.
+
 ## Screenshots
 
 ![Screenshot](./screenshot/demo.png)
@@ -19,14 +29,15 @@ This project is a Next.js implementation of a React Notes application. It adds m
 
 - Node.js (v14 or above)
 - npm or yarn
+- Docker (for containerized deployment)
 
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/react-notes-nextjs.git
-   cd react-notes-nextjs
+   git clone https://github.com/guohanli/next-react-notes.git
+   cd next-react-notes
    ```
 
 2. Install the dependencies:
@@ -99,4 +110,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 - [Next.js](https://nextjs.org/)
 - [React](https://reactjs.org/)
+- [Prisma](https://www.prisma.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucia Auth](https://lucia-auth.com/)
 - [Markdown](https://www.markdownguide.org/)
+- [MySQL](https://www.mysql.com/)
