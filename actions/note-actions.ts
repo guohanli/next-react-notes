@@ -74,7 +74,12 @@ export async function importNote(formData: FormData) {
   // 写入文件
   const buffer = Buffer.from(await file.arrayBuffer());
 
-  const title = file.name.replace(/\.[^/.]+$/, "");
+  // 移除扩展名
+  let title = file.name.replace(/\.[^/.]+$/, "");
+
+  // 处理中文文件名
+  title = decodeURIComponent(escape(title));
+
   // 调用接口，写入数据库
   const res = await addNote(title, buffer.toString("utf-8"));
 

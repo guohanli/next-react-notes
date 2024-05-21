@@ -31,7 +31,7 @@ export default function SidebarNoteList({
                 title={note.title}
                 expandedChildren={
                   <p className="sidebar-note-excerpt">
-                    {note.content?.substring(0, 20) || <i>(No content)</i>}
+                    {note.content?.substring(0, 50) || <i>(No content)</i>}
                   </p>
                 }
               >
